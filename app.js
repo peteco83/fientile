@@ -55,7 +55,7 @@ app.post("/send", (req, res) => {
 
   // send mail with defined transport object
   let mailOptions = {
-    from: `${req.body.name} <${req.body.email}>`, // sender address
+    from: `Federico Ientile <peteco1983@outlook.com>`, // sender address
     to: "federicoientile@gmail.com", // list of receivers
     subject: "You have a new email", // Subject line
     // text: "Hello world?", // plain text body
