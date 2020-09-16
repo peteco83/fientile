@@ -4,7 +4,7 @@
   "description": "website with portfolio",
   "main": "app.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "author": "Federico Ientile",
   "license": "ISC",
