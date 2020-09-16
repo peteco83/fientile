@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const exphbs = require("express-handlebars");
-const path = require("path");
+// const exphbs = require("express-handlebars");
+// const path = require("path");
 const nodemailer = require("nodemailer");
 // require("dotenv").config();
 
@@ -9,11 +9,11 @@ const app = express();
 
 //View engine setup
 
-app.engine("handlebars", exphbs());
-app.set("view engine", "handlebars");
+// app.engine("handlebars", exphbs());
+// app.set("view engine", "handlebars");
 
 // Static Folder
-app.use("/public", express.static(path.join(__dirname, "public")));
+// app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Body Parser Middleware
 app.use(
