@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const exphbs = require("express-handlebars");
 const path = require("path");
 const nodemailer = require("nodemailer");
-require('dotenv').config();
+// require("dotenv").config();
 
 const app = express();
 
@@ -17,9 +17,9 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Body Parser Middleware
 app.use(
-    bodyParser.urlencoded({
-        extended: false,
-    })
+  bodyParser.urlencoded({
+    extended: false,
+  })
 );
 app.use(bodyParser.json());
 
@@ -28,8 +28,8 @@ app.use(bodyParser.json());
 // });
 
 app.post("/send", (req, res) => {
-    console.log(req.body);
-    const output = `
+  console.log(req.body);
+  const output = `
     <h2>You have a new contact request<h2>
     <h3>Contact Details</h3>
     <ul>
@@ -40,36 +40,36 @@ app.post("/send", (req, res) => {
     <p>${req.body.message}</p>
 
     `;
-    let transporter = nodemailer.createTransport({
-        host: process.env.HOST,
-        port: process.env.PORT_MAIL,
-        secure: false, // true for 465, false for other ports
-        auth: {
-            user: process.env.EMAIL_EMISOR, // generated ethereal user
-            pass: process.env.EMAIL_PASS, // generated ethereal password
-        },
-        tls: {
-            rejectUnauthorized: false,
-        },
-    });
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: "federicoientile@gmail.com", // generated ethereal user
+      pass: "Ferdinandhocico1983", // generated ethereal password
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
 
-    // send mail with defined transport object
-    let mailOptions = {
-        from: `${req.body.name} <${req.body.email}>`, // sender address
-        to: process.env.EMAIL_RECEIVER, // list of receivers
-        subject: "You have a new email", // Subject line
-        // text: "Hello world?", // plain text body
-        html: output, // html body
-    };
+  // send mail with defined transport object
+  let mailOptions = {
+    from: `${req.body.name} <${req.body.email}>`, // sender address
+    to: "federicoientile@gmail.com", // list of receivers
+    subject: "You have a new email", // Subject line
+    // text: "Hello world?", // plain text body
+    html: output, // html body
+  };
 
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log("Message sent: %s", info.messageId);
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-        res.redirect("http://127.0.0.1:5500/index.html");
-    });
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return console.log(error);
+    }
+    console.log("Message sent: %s", info.messageId);
+    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    res.redirect("http://127.0.0.1:5500/index.html");
+  });
 });
 
 app.listen(3000, () => console.log("server started..."));
