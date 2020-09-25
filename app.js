@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 //   res.render("contact");
 // });
 
-app.post("/send", (req, res) => {
+app.post("/send", async (req, res) => {
   console.log(req.body);
   const output = `
     <h2>You have a new contact request<h2>
@@ -41,12 +41,12 @@ app.post("/send", (req, res) => {
 
     `;
   let transporter = nodemailer.createTransport({
-    host: "smtp.strato.de",
+    host: "smtp.gmail.com",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "contact@federicoientile.com", // generated ethereal user
-      pass: "quiriopanchi1983", // generated ethereal password
+      user: "federicoientile@gmail.com  ", // generated ethereal user
+      pass: "Ferdinandhocico1983", // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
@@ -62,7 +62,7 @@ app.post("/send", (req, res) => {
     html: output, // html body
   };
 
-  transporter.sendMail(mailOptions, (error, info) => {
+  await transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       return console.log(error);
     }
