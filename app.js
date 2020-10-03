@@ -41,12 +41,12 @@ app.post("/send", async (req, res) => {
 
     `;
   let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "smtp.strato.de",
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "federicoientile@gmail.com  ", // generated ethereal user
-      pass: "Ferdinandhocico1983", // generated ethereal password
+      user: "contact@federicoientile.com", // generated ethereal user
+      pass: "quiriopanchi1983", // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
@@ -55,7 +55,7 @@ app.post("/send", async (req, res) => {
 
   // send mail with defined transport object
   let mailOptions = {
-    from: `${req.body.name} <${req.body.email}>`, // sender address
+    from: `Website <contact@federicoientile.com>`, // sender address
     to: "contact@federicoientile.com", // list of receivers
     subject: "You have a new email", // Subject line
     // text: "Hello world?", // plain text body
