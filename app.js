@@ -1,46 +1,36 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-// const exphbs = require("express-handlebars");
+// const bodyParser = require("body-parser");
 // const path = require("path");
 const nodemailer = require("nodemailer");
 // require("dotenv").config();
 
 const app = express();
+const {cors} = require("./security/security")
+
+const port = process.env.PORT || 4000
 
 //View engine setup
 
-// app.engine("handlebars", exphbs());
-// app.set("view engine", "handlebars");
+app.use(express.json())
+app.use(cors)
+app.use(express.urlencoded({extended: false}))
 
-// Static Folder
-// app.use("/public", express.static(path.join(__dirname, "public")));
+app.post("/send-email", async (req, res) => {
+  
+  const {userName, userEmail, userMessage} = req.body;
 
-// Body Parser Middleware
-app.use(
-  bodyParser.urlencoded({
-    extended: false,
-  })
-);
-app.use(bodyParser.json());
-
-// app.get("/", (req, res) => {
-//   res.render("contact");
-// });
-
-app.post("/send", async (req, res) => {
-  console.log(req.body);
   const output = `
     <h2>You have a new contact request<h2>
     <h3>Contact Details</h3>
     <ul>
-        <li>Name: ${req.body.name}</li>
-        <li>Email: ${req.body.email}</li>
+        <li>Name: ${userName}</li>
+        <li>Email: ${userEmail}</li>
     </ul>
     <h3>Message</h3>
-    <p>${req.body.message}</p>
+    <p>${userMessage}</p>
 
     `;
-  let transporter = nodemailer.createTransport({
+  const transporter = nodemailer.createTransport({
     host: "smtp.strato.de",
     port: 587,
     secure: false, // true for 465, false for other ports
@@ -53,23 +43,14 @@ app.post("/send", async (req, res) => {
     },
   });
 
-  // send mail with defined transport object
-  let mailOptions = {
-    from: `Website <contact@federicoientile.com>`, // sender address
-    to: "contact@federicoientile.com", // list of receivers
-    subject: "You have a new email", // Subject line
-    // text: "Hello world?", // plain text body
-    html: output, // html body
-  };
-
-  await transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      return console.log(error);
-    }
-    console.log("Message sent: %s", info.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    res.redirect("http://127.0.0.1:5500/index.html");
-  });
+  await transporter.sendMail({
+    from: `Website <contact@federicoientile.com>`,
+    to: "contact@federicoientile.com",
+    subject: "You have a new email",
+    html: output,
+  })
+  res.json({status: true});
+  console.log('and ... message sent!!!')
 });
 
-app.listen(3000, () => console.log("server started..."));
+app.listen(port, () => console.log("server started in PORT:", port));
