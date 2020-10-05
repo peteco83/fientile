@@ -471,6 +471,11 @@ img {
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
+}
+
+.back_to_home {
+  margin-top: 20px;
 }
 
 .thanks__message {
