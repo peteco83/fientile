@@ -2,7 +2,7 @@ const express = require("express");
 // const bodyParser = require("body-parser");
 // const path = require("path");
 const nodemailer = require("nodemailer");
-require("dotenv").config();
+// require("dotenv").config();
 
 const app = express();
 const { cors } = require("./security/security");
@@ -30,12 +30,12 @@ app.post("/send-email", async (req, res) => {
 
     `;
   const transporter = nodemailer.createTransport({
-    host: process.env.HOST,
-    port: process.env.PORT,
+    host: "smtp.strato.de",
+    port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: process.env.EMAIL_EMISOR, // generated ethereal user
-      pass: process.env.EMAIL_PASS, // generated ethereal password
+      user: "contact@federicoientile.com", // generated ethereal user
+      pass: "quiriopanchi1983", // generated ethereal password
     },
     tls: {
       rejectUnauthorized: false,
@@ -43,16 +43,13 @@ app.post("/send-email", async (req, res) => {
   });
 
   await transporter.sendMail({
-    from: `Website <${process.env.EMAIL_EMISOR}>`,
-    to: process.env.EMAIL_RECEIVER,
+    from: `Website <contact@federicoientile.com>`,
+    to: "contact@federicoientile.com",
     subject: "You have a new email",
     html: output,
   });
-
-  res.redirect("https://federicoientile.com/thanks.html");
-
-  // res.json({status: true});
-  // console.log('and ... message sent!!!')
+  res.json({ status: true });
+  console.log("and ... message sent!!!");
 });
 
 app.listen(port, () => console.log("server started in PORT:", port));
