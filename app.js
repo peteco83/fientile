@@ -5,19 +5,18 @@ const nodemailer = require("nodemailer");
 // require("dotenv").config();
 
 const app = express();
-const {cors} = require("./security/security")
+const { cors } = require("./security/security");
 
-const port = process.env.PORT || 4000
+const port = process.env.PORT || 4000;
 
 //View engine setup
 
-app.use(express.json())
-app.use(cors)
-app.use(express.urlencoded({extended: false}))
+app.use(express.json());
+app.use(cors);
+app.use(express.urlencoded({ extended: false }));
 
 app.post("/send-email", async (req, res) => {
-  
-  const {userName, userEmail, userMessage} = req.body;
+  const { userName, userEmail, userMessage } = req.body;
 
   const output = `
     <h2>You have a new contact request<h2>
@@ -48,9 +47,12 @@ app.post("/send-email", async (req, res) => {
     to: "contact@federicoientile.com",
     subject: "You have a new email",
     html: output,
-  })
-  res.json({status: true});
-  console.log('and ... message sent!!!')
+  });
+
+  res.redirect("https://federicoientile.com");
+
+  // res.json({status: true});
+  // console.log('and ... message sent!!!')
 });
 
 app.listen(port, () => console.log("server started in PORT:", port));
