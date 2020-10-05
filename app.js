@@ -49,7 +49,7 @@ app.post("/send-email", async (req, res) => {
     html: output,
   });
 
-  res.redirect("https://federicoientile.com");
+  res.redirect("https://federicoientile.com/thanks.html");
 
   // res.json({status: true});
   // console.log('and ... message sent!!!')

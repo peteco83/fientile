@@ -298,7 +298,8 @@ img {
   border-radius: 0.5rem;
 }
 
-.about__text {}
+.about__text {
+}
 
 /* ===== SKILLS ===== */
 
@@ -406,7 +407,7 @@ img {
 }
 
 .work__img img:hover {
-  transform: scale(1.1)
+  transform: scale(1.1);
 }
 
 .work__img p {
@@ -459,6 +460,22 @@ img {
 .footer__title {
   font-size: 2rem;
   margin-bottom: var(--mb-4);
+}
+
+/* Thanks Message */
+
+.thanks {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.thanks__message {
+  font-size: var(--h2-font-size);
+  /* color: var(--first-color); */
 }
 
 /* MEDIA QUERIES */
@@ -518,7 +535,6 @@ img {
     flex-direction: row;
     /* align-self: flex-end; */
   }
-
 
   .home__social-icon {
     margin-bottom: 0;
