@@ -48,8 +48,7 @@ app.post("/send-email", async (req, res) => {
     subject: "You have a new email",
     html: output,
   });
-  res.json({ status: true });
-  console.log("and ... message sent!!!");
+  res.redirect("https://federicoientile.com/thanks.html");
 });
 
 app.listen(port, () => console.log("server started in PORT:", port));
