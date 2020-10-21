@@ -2,7 +2,7 @@ const express = require("express");
 // const bodyParser = require("body-parser");
 // const path = require("path");
 const nodemailer = require("nodemailer");
-// require("dotenv").config();
+require("dotenv").config();
 
 const app = express();
 const { cors } = require("./security/security");

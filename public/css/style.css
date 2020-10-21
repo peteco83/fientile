@@ -378,7 +378,7 @@ img {
 }
 
 .skills__typescript {
-  width: 70%;
+  width: 60%;
 }
 
 .skills__img {
@@ -481,6 +481,10 @@ img {
 .thanks__message {
   font-size: var(--h2-font-size);
   /* color: var(--first-color); */
+}
+
+.cv {
+  color: white;
 }
 
 /* MEDIA QUERIES */
